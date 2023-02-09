@@ -159,3 +159,7 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
     'USER_ID_CLAIM': 'id',
 }
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = Path(BASE_DIR / 'media')
