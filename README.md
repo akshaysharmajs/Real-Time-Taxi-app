@@ -37,9 +37,9 @@ We'll also use Docker Engine (v20.10) and Docker Compose (v2.12).
 
 By the end of Part 1, you'll be able to:
 
-    Create a RESTful API with Django REST Framework.
-    Implement token-based authentication with JSON Web Tokens (JWT).
-    Use Django Channels to create and update data on the server.
-    Send messages to the UI from the server via WebSockets.
-    Test asyncio coroutines with pytest.
+Create a RESTful API with Django REST Framework.
+Implement token-based authentication with JSON Web Tokens (JWT).
+Use Django Channels to create and update data on the server.
+Send messages to the UI from the server via WebSockets.
+Test asyncio coroutines with pytest.
 
