@@ -1,7 +1,7 @@
 # client/Dockerfile
 
 # pull official base image
-FROM node:19.0-alpine
+FROM --platform=linux/amd64 node:19.0-alpine
 
 # set working directory
 WORKDIR /usr/src/app

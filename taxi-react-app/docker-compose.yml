@@ -5,6 +5,7 @@ version: '3.8'
 services:
 
   taxi-server:
+    platform: linux/amd64
     build:
       context: ./server
     command: python manage.py runserver 0.0.0.0:8000
@@ -39,6 +40,7 @@ services:
       - taxi-database:/var/lib/postgresql/data
 
   taxi-client:
+    platform: linux/amd64
     build:
       context: ./client
     command: yarn start
@@ -47,6 +49,7 @@ services:
       - taxi-server
     environment: # new
       - CHOKIDAR_USEPOLLING=true
+      - REACT_APP_BASE_URL=http://localhost:8003
     ports:
       - 3001:3000
     stdin_open: true
