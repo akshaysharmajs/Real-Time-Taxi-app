@@ -14,6 +14,10 @@ import SignUp from './components/SignUp';
 
 import './App.css';
 
+import Driver from './components/Driver';
+import Rider from './components/Rider';
+
+
 function App () {
   const [isLoggedIn, setLoggedIn] = useState(() => {
     return window.localStorage.getItem('taxi.auth') !== null;
@@ -69,6 +73,8 @@ function App () {
           }
         />
       </Route>
+      <Route path='rider' element={<Rider />} />
+      <Route path='driver' element={<Driver />} />
     </Routes>
   );
 }
