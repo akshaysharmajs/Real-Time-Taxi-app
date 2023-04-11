@@ -18,6 +18,17 @@ import Driver from './components/Driver';
 import Rider from './components/Rider';
 
 
+import DriverDashboard from './components/DriverDashboard';
+import DriverDetail from './components/DriverDetail';
+
+import RiderDashboard from './components/RiderDashboard';
+import RiderDetail from './components/RiderDetail';
+
+
+
+
+
+
 function App () {
   const [isLoggedIn, setLoggedIn] = useState(() => {
     return window.localStorage.getItem('taxi.auth') !== null;
@@ -73,8 +84,14 @@ function App () {
           }
         />
       </Route>
-      <Route path='rider' element={<Rider />} />
-      <Route path='driver' element={<Driver />} />
+      <Route path='rider' element={<Rider />}>
+      <Route index element={<RiderDashboard />} />
+      <Route path=':id' element={<RiderDetail />} />
+    </Route>
+      <Route path='driver' element={<Driver />}>
+      <Route index element={<DriverDashboard />} />
+      <Route path=':id' element={<DriverDetail />} />
+    </Route>
     </Routes>
   );
 }
