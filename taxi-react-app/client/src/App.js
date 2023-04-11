@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import {
-  Button, Container, Form, Navbar
-} from 'react-bootstrap';
+  Button, Container, Form, Nav, Navbar
+} from 'react-bootstrap'; // changed
+import { isRider } from './services/AuthService'; // new
 import { LinkContainer } from 'react-router-bootstrap';
 import { Outlet, Route, Routes } from 'react-router-dom';
 
@@ -23,7 +24,7 @@ import DriverDetail from './components/DriverDetail';
 
 import RiderDashboard from './components/RiderDashboard';
 import RiderDetail from './components/RiderDetail';
-
+import RiderRequest from './components/RiderRequest';
 
 
 
@@ -86,6 +87,7 @@ function App () {
       </Route>
       <Route path='rider' element={<Rider />}>
       <Route index element={<RiderDashboard />} />
+      <Route path='request' element={<RiderRequest />} /> {/* new */}
       <Route path=':id' element={<RiderDetail />} />
     </Route>
       <Route path='driver' element={<Driver />}>
@@ -96,7 +98,8 @@ function App () {
   );
 }
 
-function Layout ({ isLoggedIn, logOut }) { // changed
+
+function Layout ({ isLoggedIn, logOut }) {
   return (
     <>
       <Navbar bg='light' expand='lg' variant='light'>
@@ -105,16 +108,21 @@ function Layout ({ isLoggedIn, logOut }) { // changed
             <Navbar.Brand className='logo'>Taxi</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle />
-          <Navbar.Collapse className='justify-content-end'>
+          <Navbar.Collapse>
+            {/* new */}
+            {
+              isRider() && (
+                <Nav className='me-auto'>
+                  <LinkContainer to='/rider/request'>
+                    <Nav.Link data-cy='request-trip'>Request a trip</Nav.Link>
+                  </LinkContainer>
+                </Nav>
+              )
+            }
             {
               isLoggedIn && (
-                <Form>
-                  {/* changed */}
-                  <Button
-                    data-cy='logOut'
-                    type='button'
-                    onClick={() => logOut()}
-                  >Log out</Button>
+                <Form className='ms-auto'>
+                  <Button type='button' onClick={() => logOut()}>Log out</Button>
                 </Form>
               )
             }
@@ -127,5 +135,6 @@ function Layout ({ isLoggedIn, logOut }) { // changed
     </>
   );
 }
+
 
 export default App;

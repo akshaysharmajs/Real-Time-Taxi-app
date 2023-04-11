@@ -135,6 +135,21 @@ describe('The rider dashboard', function () {
       .should('have.length', 1)
       .and('contain.text', 'STARTED');
   });
+ 
   
+it('Can request a new trip', function () {
+  cy.intercept('trip').as('getTrips');
+
+  cy.logIn(riderEmail);
+
+  cy.visit('/#/rider/request');
+
+  cy.get('[data-cy=pick-up-address]').type('123 Main Street');
+  cy.get('[data-cy=drop-off-address]').type('456 South Street');
+  cy.get('[data-cy=submit]').click();
+
+  cy.wait('@getTrips');
+  cy.hash().should('eq', '#/rider');
+});
 
 });
