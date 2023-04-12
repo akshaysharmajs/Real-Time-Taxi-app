@@ -84,19 +84,20 @@ function App () {
             />
           }
         />
-      </Route>
-      <Route path='rider' element={<Rider />}>
+        <Route path='rider' element={<Rider />}>
       <Route index element={<RiderDashboard />} />
       <Route path='request' element={<RiderRequest />} /> {/* new */}
       <Route path=':id' element={<RiderDetail />} />
-    </Route>
+      </Route>
       <Route path='driver' element={<Driver />}>
       <Route index element={<DriverDashboard />} />
       <Route path=':id' element={<DriverDetail />} />
-    </Route>
+      </Route>
+      </Route>
     </Routes>
   );
 }
+
 
 
 function Layout ({ isLoggedIn, logOut }) {
@@ -122,7 +123,7 @@ function Layout ({ isLoggedIn, logOut }) {
             {
               isLoggedIn && (
                 <Form className='ms-auto'>
-                  <Button type='button' onClick={() => logOut()}>Log out</Button>
+                  <Button type='button' data-cy='logOut' onClick={() => logOut()}>Log out</Button>
                 </Form>
               )
             }

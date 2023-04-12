@@ -2,7 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Breadcrumb } from 'react-bootstrap';
 
 import TripCard from './TripCard';
-import { getTrips } from '../services/TripService';
+
+import { connect, getTrips, messages } from '../services/TripService'; // changed
+
+
 
 function RiderDashboard (props) {
   const [trips, setTrips] = useState([]);
@@ -18,6 +21,22 @@ function RiderDashboard (props) {
     };
     loadTrips();
   }, []);
+
+  useEffect(() => {
+    connect();
+    const subscription = messages.subscribe((message) => {
+      setTrips(prevTrips => [
+        ...prevTrips.filter(trip => trip.id !== message.data.id),
+        message.data
+      ]);
+    });
+    return () => {
+      if (subscription) {
+        subscription.unsubscribe();
+      }
+    };
+  }, [setTrips]);
+  
 
   const getCurrentTrips = () => {
     return trips.filter(trip => {
