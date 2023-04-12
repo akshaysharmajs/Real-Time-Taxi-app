@@ -6,6 +6,7 @@ import { Breadcrumb } from 'react-bootstrap';
 import TripCard from './TripCard';
 
 import { connect, getTrips, messages } from '../services/TripService';
+import { toast } from 'react-toastify';
 
 function DriverDashboard (props) {
   const [trips, setTrips] = useState([]);
@@ -29,6 +30,7 @@ function DriverDashboard (props) {
         ...prevTrips.filter(trip => trip.id !== message.data.id),
         message.data
       ]);
+      updateToast(message.data); // new
     });
     return () => {
       if (subscription) {
@@ -36,6 +38,14 @@ function DriverDashboard (props) {
       }
     };
   }, [setTrips]);
+
+  const updateToast = (trip) => {
+    const riderName = `${trip.rider.first_name} ${trip.rider.last_name}`;
+    if (trip.driver === null) {
+      toast.info(`${riderName} has requested a trip.`);
+    }
+  };
+  
 
   const getCurrentTrips = () => {
     return trips.filter(trip => {

@@ -8,11 +8,14 @@ import {
 import { isRider } from './services/AuthService'; // new
 import { LinkContainer } from 'react-router-bootstrap';
 import { Outlet, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify'; // new
 
 import Landing from './components/Landing';
 import LogIn from './components/LogIn';
 import SignUp from './components/SignUp';
 
+
+import 'react-toastify/dist/ReactToastify.css'; // new
 import './App.css';
 
 import Driver from './components/Driver';
@@ -133,6 +136,7 @@ function Layout ({ isLoggedIn, logOut }) {
       <Container className='pt-3'>
         <Outlet />
       </Container>
+      <ToastContainer />
     </>
   );
 }

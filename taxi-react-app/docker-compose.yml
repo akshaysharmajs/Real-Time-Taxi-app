@@ -50,6 +50,7 @@ services:
     environment: # new
       - CHOKIDAR_USEPOLLING=true
       - REACT_APP_BASE_URL=http://localhost:8003
+      - REACT_APP_GOOGLE_MAPS_KEY=AIzaSyDSM3UU3tk5suFWnbP3B5AF4RQff8F1X_s # new
     ports:
       - 3001:3000
     stdin_open: true
